@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body{
+    overflow-x: hidden;
+}
+
+.fontfam1{
+    font-family: "Yuji Mai", serif !important ;
+}
+.logo_img{
+    height: 3rem;
+    width: 3rem;
+}
+
+main{
+    height: 100vh;
+    width: 100%;
+    font-family: "Yuji Mai", serif !important; 
+}
+.navbar{
+    width: 100% !important;
+}
+.achu{
+    height:46rem;
+    width: 100%;
+    top:2rem;
+    position:absolute;
+    top: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;    
+    background-color: rgba(255, 255, 255, 0.4); 
+}
+
+.menu{
+    margin-top: 12rem;
+    height: 100vh;
+    width: 100%;
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(0.5);
+    }
+    50%{
+        transform: scale(1);
+    }100%{
+        transform: scale(0.5);
+    }
+}
+
+.error{
+    color: red;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.card{
+    animation: grow 1s ease-in-out;
+    animation-timeline: view();
+    margin: 2px;
+}
+
+.card-img-top{
+    height: 40%;
+    width: 100%;
+}
+
+.card-desing{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.about_us{
+    height: 90vh;
+    width: 100%;
+    margin-top: 88rem;
+    background:url("./public/imgs/bg.jpg");
+    background-repeat:no-repeat;
+    background-size: cover;   
+    color: white;
+}
+
+.coffe_achu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: -4rem;
+    position: absolute;
+    background-color:rgba(255,255,255,0.5);
+    height: 35rem;
+    width: 100%;
+}
+
+.about-img{
+    position: relative;
+    left: -2rem;
+    height: 80%;
+    width: 35%;
+    border-radius: 4rem;
+}
+
+.about-text{
+    font-size: 1.3rem;
+    color: black;
+    width: 45%;
+}
+
+.login{
+    margin-top: 2rem;
+    width: 30rem;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 90vh;
+    width: 100%;
+}
+.img{
+    width: 40%;
+}
+.desc{
+    width: 40%;
+}
+.Nums{
+    font-size: 1.5rem;
+}
+.btn_size{
+    height: 1.5rem;
+    width: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Order_img{
+    height: 90%;
+    width: 60%;
+    border-radius: 1rem;
+}
+
+
+.userProfile{
+    margin-right: 1rem;
+}
