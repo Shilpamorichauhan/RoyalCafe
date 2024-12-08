@@ -91,7 +91,7 @@
   </div>
 </div>
 <div class="card" style="width: 18rem;">
-  <img src="../public/imgs/3d.jpg" class="card-img-top" alt="...">
+  <img src="../public/imgs/3d.png" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Black Tea</h5>
     <p class="card-text">Black tea is a type of tea produced from the camellia sinensis plant that is highly oxidized, resulting in a dark reddish-gold hue, a hearty, slightly astringent flavor, and a moderate amount of caffeine.</p>

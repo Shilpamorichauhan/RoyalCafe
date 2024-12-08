@@ -35,6 +35,6 @@ if (mysqli_num_rows($result) == 0) {
         <?php
     }
     
-    echo '</div>';
+    echo '</div>';  
 }
 ?>

@@ -1,6 +1,5 @@
 <?php
 session_start();
-include '../header.php';
 include_once("../../db/connection.php"); // Ensure this is correctly connected to your database
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

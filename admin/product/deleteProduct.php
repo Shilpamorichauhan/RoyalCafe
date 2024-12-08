@@ -12,4 +12,5 @@ if(mysqli_query($conn,$query)){
 }else{
     header("Location:../product.php");
 }
+
 ?>

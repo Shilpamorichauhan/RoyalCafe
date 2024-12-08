@@ -14,7 +14,7 @@ include './header.php';
                 <label for="pass" class="form-label">Password</label>
                 <span id="pass_error" class="form-label" style="color:red;"></span>
                 <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
-                <a href="">Forget password</a>
+                <a href="forgetPassword.php">Forget password</a>
             </div>
 
             <div class="mb-3">

@@ -2,98 +2,68 @@
 session_start();
 include_once("connection.php");
 
-$username = $_SESSION['email'];
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
+if (!isset($_POST['name'], $_POST['quantity'], $_POST['price'], $_POST['address'], $_POST['paymentMethod'])) {
+    die('Error: Missing order details.');
+}
 
 require 'PHPMailer-master/src/Exception.php';
 require 'PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer-master/src/SMTP.php';
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
 $mail = new PHPMailer(true);
 
+$username = $_SESSION['email'];
+
 try {
-    // Setup SMTP configuration
     $mail->isSMTP();
-    $mail->Host       = 'smtp.gmail.com';  // Gmail SMTP server
+    $mail->Host       = 'smtp.gmail.com';  
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'shivayfurniture9@gmail.com';   // Your Gmail address
-    $mail->Password   = 'bnky aurf qusv fmjy';           // Your app password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
-    $mail->Port       = 587;  // Port 587 for TLS encryption
+    $mail->Username   = "shilpamorichauhan@gmail.com";   // Your email address
+    $mail->Password   = "deckkkpsjdhyneyt";   // Your email password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = 587;
 
-    // Sender and recipient details
-    $mail->setFrom('shivayfurniture9@gmail.com', 'Shivay Furniture');
-    $mail->addAddress($username, "");  // Assuming $username is the email address
-    $mail->addReplyTo('shivayfurniture9@gmail.com', 'Information');
-    $mail->addCC('shivayfurniture9@gmail.com');
-    $mail->addBCC('shivayfurniture9@gmail.com');
-
-    // Get product details from POST request
-    $productName = $_POST['productName'] ?? '';
-    $quantity = $_POST['NumOfOrder'] ?? 0;
-    $price = $_POST['price'] ?? 0;
+    // Set up the email sender and recipient
+    $mail->setFrom("shilpamorichauhan@gmail.com", 'Royal Cafe');
+    $mail->addAddress($username);  // Send confirmation to the user
+    $mail->addReplyTo("shilpamorichauhan@gmail.com", 'Information');
+    
+    // Get the order details from the POST data
+    $productName = $_POST['name'];
+    $quantity = $_POST['quantity'];
+    $price = $_POST['price'];
     $totalPrice = $price * $quantity;
-    $address = $_POST['address'] ?? '';
-    $paymentMethod = $_POST['paymentMethod'] ?? '';
+    $address = $_POST['address'];
+    $paymentMethod = $_POST['paymentMethod'];
 
-    // Content - HTML body of the email
+    // Set up the email content
     $mail->isHTML(true);
     $mail->Subject = 'Your Order Confirmation - ROYAL CAFE';
-    $mail->Body = '
+    $mail->Body    = '
     <div style="background-color: #f0f8ff; padding: 20px; font-family: Arial, sans-serif;">
-        <img src="https://example.com/logo.jpg" alt="Logo" style="display: block; margin: 0 auto 20px; height:10%;width:15%;">
-        <h1 style="color: #333; text-align: center;">ROYAL CAFE <br> Order Confirmation</h1>
-        <p><b>Thank you for your order!</b><br>We have received your order and are processing it. Here are the details:</p>
-        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-            <tr>
-                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Product Name</strong></td>
-                <td style="padding: 8px; border: 1px solid #ddd;">' . htmlspecialchars($productName) . '</td>
-            </tr>
-            <tr>
-                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Quantity</strong></td>
-                <td style="padding: 8px; border: 1px solid #ddd;">' . htmlspecialchars($quantity) . '</td>
-            </tr>
-            <tr>
-                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Price per Item</strong></td>
-                <td style="padding: 8px; border: 1px solid #ddd;">&#8377;' . htmlspecialchars($price) . '</td>
-            </tr>
-            <tr>
-                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Total Price</strong></td>
-                <td style="padding: 8px; border: 1px solid #ddd;">&#8377;' . htmlspecialchars($totalPrice) . '</td>
-            </tr>
-            <tr>
-                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Delivery Address</strong></td>
-                <td style="padding: 8px; border: 1px solid #ddd;">' . htmlspecialchars($address) . '</td>
-            </tr>
-            <tr>
-                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Payment Method</strong></td>
-                <td style="padding: 8px; border: 1px solid #ddd;">' . ucfirst(htmlspecialchars($paymentMethod)) . '</td>
-            </tr>
+        <h1 style="text-align: center;">ROYAL CAFE - Order Confirmation</h1>
+        <p><b>Thank you for your order!</b><br>We have received your order. Here are the details:</p>
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr><td><strong>Product Name:</strong></td><td>' . htmlspecialchars($productName) . '</td></tr>
+            <tr><td><strong>Quantity:</strong></td><td>' . htmlspecialchars($quantity) . '</td></tr>
+            <tr><td><strong>Price per Item:</strong></td><td>&#8377;' . htmlspecialchars($price) . '</td></tr>
+            <tr><td><strong>Total Price:</strong></td><td>&#8377;' . htmlspecialchars($totalPrice) . '</td></tr>
+            <tr><td><strong>Delivery Address:</strong></td><td>' . htmlspecialchars($address) . '</td></tr>
+            <tr><td><strong>Payment Method:</strong></td><td>' . ucfirst(htmlspecialchars($paymentMethod)) . '</td></tr>
         </table>
-        <p style="margin-top: 20px;">Your order will be processed soon, and you will be notified once it is shipped.</p>
-        <p style="margin-top: 20px;color:red;">IF YOUR ADDRESS IS INCORRECT MULTIPLE TIMES, YOUR ACCOUNT MAY BE DELETED PERMANENTLY.</p>
+        <p>We are processing your order and will notify you once it is shipped.</p>
+        <p style="color: red;">Please ensure your address is correct to avoid delivery issues.</p>
     </div>';
 
-    // Plain text version for email clients that do not support HTML
-    $mail->AltBody = 'Thank you for your order. Below are your order details: Product: ' . $productName . ', Quantity: ' . $quantity . ', Total: &#8377;' . $totalPrice . '.';
-
-    // Send the email
     $mail->send();
 
-    // Redirect or show success message
-    echo "<script>
-            alert('Order confirmation sent successfully.');
-            window.location.href = '../user';  // Adjust to the appropriate page
-          </script>";
+    header("Location:../user/index.php#menu");
 
 } catch (Exception $e) {
-    // Error handling
-    echo "<script>
-            alert('Error occurred while sending the email: " . $e->getMessage() . "');
-            window.location.href = '../user';  // Redirect to the appropriate page
-          </script>";
+    echo "Error: " . $mail->ErrorInfo;
 }
 ?>
